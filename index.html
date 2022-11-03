@@ -10,23 +10,130 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js" integrity="sha512-BNc7saQYlxCL10lykUYhFBcnzdKMnjx5fp5s5wPucDyZ7rKNwCoqJh1GwEAIhuePEK4WM9askJBRsu7ma0Rzvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>hljs.highlightAll();</script>
   <title>Form Demo</title>
+  <style>
+    /* The browser window */
+    .browser {
+      box-sizing: border-box;
+      border: 3px solid #f1f1f1;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+
+    /* Container for columns and the top "toolbar" */
+    .browser-row {
+      padding: 10px;
+      background: #f1f1f1;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+
+    /* Create three unequal columns that floats next to each other */
+    .column {
+      float: left;
+    }
+
+    .left {
+      width: 15%;
+    }
+
+    .right {
+      width: 10%;
+    }
+
+    .middle {
+      width: 75%;
+    }
+
+    /* Clear floats after the columns */
+    .browser-row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Three dots */
+    .dot {
+      margin-top: 4px;
+      height: 12px;
+      width: 12px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Style the input field */
+    .browser-input {
+      width: 100%;
+      border-radius: 3px;
+      border: none;
+      background-color: white;
+      margin-top: -8px;
+      height: 25px;
+      color: #666;
+      padding: 5px;
+    }
+
+    /* Three bars (hamburger menu) */
+    .bar {
+      width: 17px;
+      height: 3px;
+      background-color: #aaa;
+      margin: 3px 0;
+      display: block;
+    }
+
+    /* Page content */
+    .content {
+      padding: 10px;
+    }
+  </style>
 </head>
 <body class="bg-body">
   <div class="container-fluid">
     <div class="row">
-<div class="col-md-12 border border-dark bg-light" id="demo" style="white-space: pre;">
+<div class="col-md-8 offset-md-2 border border-dark bg-light" id="demo" style="white-space: pre;">
 # routes.rb
-get("/books/:<input type="text" id="slug">, { :controller => "books", :action => "show" })
-
+<!-- get("/books/:<input type="text" id="slug">, { :controller => "books", :action => "show" }) -->
+<div class="input-group mb-3">
+  <span class="input-group-text">get("/books/:</span>
+  <input type="text" class="form-control" id="slug">
+  <span class="input-group-text ps-0">", { :controller => "books", :action => "show" })</span>
 </div>
 </div>
+</div>
 
-  <div class="row">
-    <div class="col-md-12 border border-dark bg-light" id="demo" style="white-space: pre;">
-# URL
-https://www.myapp.com/books/<input type="text" id="realSlug">
+<div class="row">
+  <div class="col-12">
 
-    </div>
+    <div class="browser">
+      <div class="browser-row">
+        <div class="column left">
+          <span class="dot" style="background:#ED594A;"></span>
+          <span class="dot" style="background:#FDD800;"></span>
+          <span class="dot" style="background:#5AC05A;"></span>
+        </div>
+        <div class="column middle">
+          <!-- <input type="text" class="browser-input" value="http://www.w3schools.com"> -->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">https://www.myapp.com/books/</span>
+            <input type="text" class="form-control" id="realSlug">
+          </div>
+        </div>
+        <div class="column right">
+          <div style="float:right">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    
+      <div class="content">
+        <h3>Book Details</h3>
+        <p>Wow this book in particular is just SO interesting.</p>
+      </div>
+    </div>    
+  </div>
 </div>
 
 <div class="row">
