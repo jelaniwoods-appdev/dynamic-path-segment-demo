@@ -146,6 +146,26 @@
   <div class="col-12 p-4" id="fullResult">
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div id="editor" class="bg-dark text-white px-3 rounded d-none" style="white-space: pre-wrap;">
+class BooksController < ApplicationController
+
+  def show
+    # Paramaters look like: <span id="params"></span>
+    book_id = params.fetch("<span id="paramName"></span>")
+    @book = Book.where({ :id => }).at(0)
+
+    render({ :template => "books/show.html.erb" })
+  end
+end
+      </div>
+    </div>
+  </div>
+</div>
+
     <div id="result"></div>
     <script>
     document.getElementById("slug").addEventListener("change", formatParams);
@@ -177,6 +197,9 @@
       var index = json.lastIndexOf(':')+1
       var content = json.slice(0, index-1) + ' => ' + json.slice(index);
       document.getElementById('fullResult').textContent = content
+      document.getElementById('paramName').textContent = slugName.value
+      document.getElementById('params').textContent = content
+      document.getElementById('editor').classList.remove('d-none')
     }
     </script>
   </body>
