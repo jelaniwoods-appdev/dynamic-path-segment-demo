@@ -6,7 +6,12 @@ Dynamic route segments are dynamic routes (a.k.a. flexible path segments, url sl
 
 Defining one route that can match multiple values.
 
+In cases where we want to define one route that matches `/post/1`, `/post/abc`, or `/posts/` anything
+
+
 ## Why do we use them
+
+Defining routes by using predefined paths is not always enough for complex applications. 
 
 - Support infinite route variations
 - Save time defining routes
