@@ -8,6 +8,8 @@ Defining one route that can match multiple values.
 
 ## Why do we use them
 
+- Support infinite route variations
+- Save time defining routes
 
 ## How to define
 
