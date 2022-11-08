@@ -156,7 +156,7 @@ class BooksController < ApplicationController
   def show
     # Paramaters look like: <span id="params"></span>
     book_id = params.fetch("<span id="paramName"></span>")
-    @book = Book.where({ :id => }).at(0)
+    @book = Book.where({ :id => book_id }).at(0)
 
     render({ :template => "books/show.html.erb" })
   end
