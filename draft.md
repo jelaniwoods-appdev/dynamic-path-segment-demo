@@ -1,6 +1,26 @@
 # Dynamic path segments
 
-## What are they
+## The Limit of Static Routes
+
+Whenever we define a route, like for `/about` in our application to display the about page...
+
+A **static route** is a route who's job is to do the same thing every time it's visited.
+
+A **static route** is a route that can _only_ be accessed when a user visits the route **exactly**.
+
+If we define a route for `/about`...
+
+```rb
+get("/about", { :controller => "application", :action => "about" })
+```
+
+Then this route **can only be activated** when a person visits `www.our-app.com/about` .
+
+This works great for pages with content that doesn't change, like a Home, Rules, or About page...
+
+This works well when we're getting input from a user through a form and since 
+
+## What are Dynamic Routes?
 
 Dynamic route segments are dynamic routes (a.k.a. flexible path segments, url slugs, pretty urls, and others)
 
@@ -9,7 +29,7 @@ Defining one route that can match multiple values.
 In cases where we want to define **one route** that matches `/post/1`, `/post/abc`, or `/posts/` anything
 
 
-## Why do we use them
+### Why do we use them
 
 Defining routes by using predefined paths is not always enough for complex applications. 
 
@@ -17,9 +37,9 @@ Defining routes by using predefined paths is not always enough for complex appli
 - Save time defining routes
 - We need a piece of information in the dynamic part 
 
-## How to make a dynamic route
+## How to make a Dynamic Route
 
-Instead of a **static route**, that matches exactly one rouote that a person can visit:
+Instead of a **static route**, that will only be activated when a person matches exactly one route that a person can visit:
 
 ```rb
 get("/rps/rock", { :controller => "moves", :action => "play_rock" })
@@ -37,7 +57,7 @@ get("/rps/:move", { :controller => "moves", :action => "play" })
 ```
 
 
-## Using `params`
+### Using `params`
 
 
 ## Demo
