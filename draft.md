@@ -14,11 +14,18 @@ If we define a route for `/about`...
 get("/about", { :controller => "application", :action => "about" })
 ```
 
-Then this route **can only be activated** when a person visits `www.our-app.com/about` .
+Then this route **can only be activated** when a person visits `www.our-app-name.com/about` .
 
-This works great for pages with content that doesn't change, like a Home, Rules, or About page...
+This works great for pages with content that <u>doesn't change</u>, like a Home, Rules, or About page...
 
-This works well when we're getting input from a user through a form and since 
+This technique also works when we get input from a user through a form submission (since **Query Strings** are optional and are allowed on any route).
+
+On YouTube, the video you watched is determined by a Query String
+
+> https://www.youtube.com/watch**?v=pKO9UjSeLew**
+
+But for apps like Twitter, Spotify, or GitHub
+
 
 ## What are Dynamic Routes?
 
