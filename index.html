@@ -154,6 +154,9 @@
 </div>
 
 
+  <div id="editor"></div>
+
+
   <div id="result"></div>
   <script>
   document.getElementById("slug").addEventListener("change", formatParams);
@@ -185,8 +188,6 @@
       var index = json.lastIndexOf(':')+1
       var content = json.slice(0, index-1) + ' => ' + json.slice(index);
       document.getElementById('fullResult').textContent = content
-      document.getElementById('paramName').textContent = slugName.value
-      document.getElementById('params').textContent = content
       document.getElementById('editor').classList.remove('d-none')
 
       var action = `class BooksController < ApplicationController
