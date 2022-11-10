@@ -87,8 +87,14 @@
       padding: 10px;
     }
   </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/codemirror.min.js" integrity="sha512-Kpi2Sp2KpXM2S7aM0p+CwWhm8NuogI15GFPXCmgqAnFr5c86VBXuLEZu0IGBwGSdhhTW6148hP9KTcRMmrjuFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/mode/ruby/ruby.min.js" integrity="sha512-kIWQdD2Oq6DBWghYgnP6MpRMCuPxBvSI8/UBo7yxVm1blEPnNxVkwypVXky2KmIUgN2oNN7yd5TCeXJ48e867A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body class="bg-body">
+
+
   <div class="container-fluid">
     <div class="row">
 <div class="col-md-8 offset-md-2 border border-dark bg-light" id="demo" style="white-space: pre;">
@@ -147,43 +153,25 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div id="editor" class="bg-dark text-white px-3 rounded d-none" style="white-space: pre-wrap;">
-class BooksController < ApplicationController
 
-  def show
-    # Paramaters look like: <span id="params"></span>
-    book_id = params.fetch("<span id="paramName"></span>")
-    @book = Book.where({ :id => book_id }).at(0)
+  <div id="result"></div>
+  <script>
+  document.getElementById("slug").addEventListener("change", formatParams);
 
-    render({ :template => "books/show.html.erb" })
-  end
-end
-      </div>
-    </div>
-  </div>
-</div>
+  function formatParams() {
+    var x = document.getElementById("slug");
 
-    <div id="result"></div>
-    <script>
-    document.getElementById("slug").addEventListener("change", formatParams);
-    
-    function formatParams() {
-      var x = document.getElementById("slug");
+    var rails_params = {};
+    rails_params[`${x.value}`] = '...'
+    console.log(rails_params)
+    var json = JSON.stringify(rails_params)
+    var index = json.lastIndexOf(':')+1
+    var content = json.slice(0, index-1) + ' => ' + json.slice(index);
+    document.getElementById('result').textContent = content
+  }
+  </script>
 
-      var rails_params = {};
-      rails_params[`${x.value}`] = '...'
-      console.log(rails_params)
-      var json = JSON.stringify(rails_params)
-      var index = json.lastIndexOf(':')+1
-      var content = json.slice(0, index-1) + ' => ' + json.slice(index);
-      document.getElementById('result').textContent = content
-    }
-    </script>
-
-    <script>
+  <script>
     document.getElementById("realSlug").addEventListener("change", formatParams);
     
     function formatParams() {
@@ -200,7 +188,26 @@ end
       document.getElementById('paramName').textContent = slugName.value
       document.getElementById('params').textContent = content
       document.getElementById('editor').classList.remove('d-none')
+
+      var action = `class BooksController < ApplicationController
+
+  def show
+    # Paramaters look like: ${content}
+    book_id = params.fetch("${slugName.value}")
+    @book = Book.where({ :id => book_id }).at(0)
+
+    render({ :template => "books/show.html.erb" })
+  end
+end`
+
+      var myCodeMirror = CodeMirror(document.body, {
+        value: action,
+        lineNumbers: true,
+        readOnly: "nocursor",
+        mode:  "ruby"
+      });
     }
-    </script>
+  </script>
+
   </body>
 </html>

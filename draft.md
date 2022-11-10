@@ -6,9 +6,9 @@ Whenever we define a route, like for `/about` in our application to display the 
 
 A **static route** is a route who's job is to do the same thing every time it's visited.
 
-A **static route** is a route that can _only_ be accessed when a user visits the route **exactly**.
+A **static route** is a route that can _only_ be accessed when a person visits the route **exactly**.
 
-If we define a route for `/about`...
+Meaning if we define a route for `/about` like this:
 
 ```rb
 get("/about", { :controller => "application", :action => "about" })
@@ -16,15 +16,39 @@ get("/about", { :controller => "application", :action => "about" })
 
 Then this route **can only be activated** when a person visits `www.our-app-name.com/about` .
 
-This works great for pages with content that <u>doesn't change</u>, like a Home, Rules, or About page...
+This works great for pages with content that <u>doesn't change</u>, like a Home, Rules, or About page.
 
-This technique also works when we get input from a user through a form submission (since **Query Strings** are optional and are allowed on any route).
+This technique also works well when we get input from a user through a form submission (since **Query Strings** are optional and are allowed on _any_ route).
 
-On YouTube, the video you watched is determined by a Query String
+While we often use Query Strings for processing form submissions. can be used for a lot of things,
+In fact, YouTube uses a Query String to determine which video you're watching:
 
 > https://www.youtube.com/watch**?v=pKO9UjSeLew**
 
-But for apps like Twitter, Spotify, or GitHub
+But for apps like Twitter, the New York Times, or GitHub we often _want_ routes that look like this:
+
+Twitter:
+- https://twitter.com/jackblack
+- https://twitter.com/rubylangorg
+- https://twitter.com/Google
+
+New York Times:
+- https://www.nytimes.com/section/todayspaper
+- https://www.nytimes.com/section/politics
+- https://www.nytimes.com/section/sports
+
+
+- https://github.com/raghubetina
+
+If we wanted our routes to look like like that, we would need to define
+
+Using static routes, we would need to define very similar looking routes; one for each user at Twitter.
+
+```rb
+get("/jackback", { :controller => "...", :action => "..." })
+get("/rubylangorg", { :controller => "...", :action => "..." })
+get("/Google", { :controller => "...", :action => "..." })
+```
 
 
 ## What are Dynamic Routes?
@@ -73,4 +97,6 @@ get("/rps/:move", { :controller => "moves", :action => "play" })
 - Visit URL
 - See params
   - where can we access `params`?
+
+
 
