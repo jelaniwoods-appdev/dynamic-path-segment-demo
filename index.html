@@ -152,7 +152,7 @@
     </div>
 
     <div id="editor" class="invisible mt-3"><code># app/controllers/books_controller.rb</code>
-      <div id="codemirror" style="height: 300px;"></div>
+      <div id="codemirror"></div>
     </div>
   </div>
 
@@ -204,7 +204,7 @@
     render({ :template => "books/show.html.erb" })
   end
 end`
-      var cm = editor.children[0]
+      var cm = editor.children[editor.children.length -1]
       var myCodeMirror = CodeMirror(function(elt) {
           cm.parentNode.replaceChild(elt, cm);
         }, {
