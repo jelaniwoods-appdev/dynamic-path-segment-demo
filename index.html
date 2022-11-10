@@ -12,6 +12,10 @@
   <script>hljs.highlightAll();</script>
   <title>Form Demo</title>
   <style>
+    .CodeMirror {
+      /* border: 1px solid #eee; */
+      height: auto !important;
+    }
     /* The browser window */
     .browser {
       box-sizing: border-box;
@@ -148,7 +152,7 @@
     </div>
 
     <div id="editor" class="d-none mt-3"># app/controllers/books_controller.rb
-      <div id="codemirror"></div>
+      <div id="codemirror" style="height: 300px;"></div>
     </div>
   </div>
 
@@ -200,10 +204,7 @@ end`
       var myCodeMirror = CodeMirror(function(elt) {
           cm.parentNode.replaceChild(elt, cm);
         }, {
-        attributes: {
-          id: "codemirror"
-        },
-        id: "codemirror",
+        viewportMargin: Infinity,
         value: action,
         lineNumbers: true,
         readOnly: "nocursor",
