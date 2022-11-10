@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet"href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css" integrity="sha512-hasIneQUHlh06VNBe7f6ZcHmeRTLIaQWFd43YriJ0UND19bvYRauxthDg8E4eVNPm9bRUhr5JGeqH7FRFXQu5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js" integrity="sha512-BNc7saQYlxCL10lykUYhFBcnzdKMnjx5fp5s5wPucDyZ7rKNwCoqJh1GwEAIhuePEK4WM9askJBRsu7ma0Rzvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>hljs.highlightAll();</script>
@@ -33,7 +34,7 @@
     }
 
     .left {
-      width: 15%;
+      width: 10%;
     }
 
     .right {
@@ -41,7 +42,7 @@
     }
 
     .middle {
-      width: 75%;
+      width: 80%;
     }
 
     /* Clear floats after the columns */
@@ -96,68 +97,61 @@
 
 
   <div class="container-fluid">
-    <div class="row">
-<div class="col-md-8 offset-md-2 border border-dark bg-light" id="demo" style="white-space: pre;">
-# routes.rb
-<!-- get("/books/:<input type="text" id="slug">, { :controller => "books", :action => "show" }) -->
-<div class="input-group mb-3">
-  <span class="input-group-text">get("/books/:</span>
-  <input type="text" class="form-control" id="slug">
-  <span class="input-group-text ps-0">", { :controller => "books", :action => "show" })</span>
-</div>
-</div>
-</div>
-
-
-<div class="row">
-  <div class="col-12">
-
-    <div class="browser">
-      <div class="browser-row">
-        <div class="column left">
-          <span class="dot" style="background:#ED594A;"></span>
-          <span class="dot" style="background:#FDD800;"></span>
-          <span class="dot" style="background:#5AC05A;"></span>
-        </div>
-        <div class="column middle">
-          <!-- <input type="text" class="browser-input" value="http://www.w3schools.com"> -->
+    <div class="row  ps-2 pt-1 border border-secondary bg-light mb-5" id="routes-demo">
+      # config/routes.rb
+      <div class="col-md-8" id="demo">
+        <div class="mt-5">
           <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">https://www.myapp.com/books/</span>
-            <input type="text" class="form-control" id="realSlug">
-          </div>
-        </div>
-        <div class="column right">
-          <div style="float:right">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            <span class="input-group-text">get("/books/:</span>
+            <input type="text" class="form-control" id="slug">
+            <span class="input-group-text ps-0">", { :controller => "books", :action => "show" })</span>
           </div>
         </div>
       </div>
-    
-      <div class="content">
-        <h3>Book Details</h3>
-        <p>Wow this book in particular is just SO interesting.</p>
+    </div>
+
+    <div class="row" id="browser-demo">
+      <div class="col-12">
+
+        <div class="browser">
+          <div class="browser-row">
+            <div class="column left">
+              <span class="dot" style="background:#ED594A;"></span>
+              <span class="dot" style="background:#FDD800;"></span>
+              <span class="dot" style="background:#5AC05A;"></span>
+            </div>
+            <div class="column middle">
+              <!-- <input type="text" class="browser-input" value="http://www.w3schools.com"> -->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">https://www.myapp.com/books/</span>
+                <input type="text" class="form-control" id="realSlug">
+                <button class="btn btn-outline-secondary text-decoration-none" type="button" id="visit-btn">
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="column right">
+              <div style="float:right">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+            </div>
+          </div>
+        
+          <div class="content">
+            <h3>Book Details</h3>
+            <p>Wow this book in particular is just SO interesting.</p>
+          </div>
+        </div>    
       </div>
-    </div>    
+    </div>
+
+    <div id="editor" class="d-none mt-3"># app/controllers/books_controller.rb
+      <div id="codemirror"></div>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-12 p-4" id="result">
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-12 p-4" id="fullResult">
-  </div>
-</div>
-
-
-  <div id="editor"></div>
-
-
-  <div id="result"></div>
   <script>
   document.getElementById("slug").addEventListener("change", formatParams);
 
@@ -175,7 +169,8 @@
   </script>
 
   <script>
-    document.getElementById("realSlug").addEventListener("change", formatParams);
+    // document.getElementById("realSlug").addEventListener("change", formatParams);
+    document.getElementById("visit-btn").addEventListener("click", formatParams);
     
     function formatParams() {
       var slugName = document.getElementById("slug");
@@ -187,7 +182,7 @@
       var json = JSON.stringify(rails_params)
       var index = json.lastIndexOf(':')+1
       var content = json.slice(0, index-1) + ' => ' + json.slice(index);
-      document.getElementById('fullResult').textContent = content
+      // document.getElementById('fullResult').textContent = content
       document.getElementById('editor').classList.remove('d-none')
 
       var action = `class BooksController < ApplicationController
@@ -200,13 +195,27 @@
     render({ :template => "books/show.html.erb" })
   end
 end`
-
-      var myCodeMirror = CodeMirror(document.body, {
+      var editor = document.getElementById("editor")
+      var cm = editor.children[0]
+      var myCodeMirror = CodeMirror(function(elt) {
+          cm.parentNode.replaceChild(elt, cm);
+        }, {
+        attributes: {
+          id: "codemirror"
+        },
+        id: "codemirror",
         value: action,
         lineNumbers: true,
         readOnly: "nocursor",
         mode:  "ruby"
       });
+
+      // var myCodeMirror = CodeMirror(document.body, {
+      //   value: action,
+      //   lineNumbers: true,
+      //   readOnly: "nocursor",
+      //   mode:  "ruby"
+      // });
     }
   </script>
 
