@@ -151,7 +151,7 @@
       </div>
     </div>
 
-    <div id="editor" class="d-none mt-3"># app/controllers/books_controller.rb
+    <div id="editor" class="invisible mt-3"># app/controllers/books_controller.rb
       <div id="codemirror" style="height: 300px;"></div>
     </div>
   </div>
@@ -187,7 +187,12 @@
       var index = json.lastIndexOf(':')+1
       var content = json.slice(0, index-1) + ' => ' + json.slice(index);
       // document.getElementById('fullResult').textContent = content
-      document.getElementById('editor').classList.remove('d-none')
+      var editor = document.getElementById("editor")
+
+      if (editor.classList.contains("invisible")) {
+        editor.classList.remove('invisible')
+        editor.classList.add('visible')
+      }
 
       var action = `class BooksController < ApplicationController
 
@@ -199,7 +204,6 @@
     render({ :template => "books/show.html.erb" })
   end
 end`
-      var editor = document.getElementById("editor")
       var cm = editor.children[0]
       var myCodeMirror = CodeMirror(function(elt) {
           cm.parentNode.replaceChild(elt, cm);
