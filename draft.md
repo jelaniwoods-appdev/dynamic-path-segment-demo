@@ -1,4 +1,4 @@
-# Dynamic path segments
+# Dynamic Routing
 
 ## The Limit of Static Routes
 
