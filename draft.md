@@ -25,12 +25,12 @@ In fact, YouTube uses a Query String to determine which video you're watching:
 
 > https://www.youtube.com/watch**?v=pKO9UjSeLew**
 
-But for apps like Twitter, the New York Times, or GitHub we often _want_ routes that look like this:
+But for some features in apps like YouTube, the New York Times, or GitHub we _want_ routes that look like this:
 
-Twitter:
-- https://twitter.com/jackblack
-- https://twitter.com/rubylangorg
-- https://twitter.com/Google
+YouTube:
+- https://youtube.com/c/gorailstv
+- https://youtube.com/c/jablinskigames
+- https://youtube.com/c/google
 
 New York Times:
 - https://www.nytimes.com/section/todayspaper
@@ -40,14 +40,16 @@ New York Times:
 
 - https://github.com/raghubetina
 
+without Query Strings
+
 If we wanted our routes to look like like that, we would need to define
 
-Using static routes, we would need to define very similar looking routes; one for each user at Twitter.
+Using static routes, we would need to define very similar looking routes; one for each channel at YouTube.
 
 ```rb
-get("/jackback", { :controller => "...", :action => "..." })
-get("/rubylangorg", { :controller => "...", :action => "..." })
-get("/Google", { :controller => "...", :action => "..." })
+get("/c/Google", { :controller => "...", :action => "..." })
+get("/c/GorailsTV", { :controller => "...", :action => "..." })
+get("/c/JablinskiGames", { :controller => "...", :action => "..." })
 ```
 
 
