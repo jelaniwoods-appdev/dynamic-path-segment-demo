@@ -96,5 +96,4 @@ get("/rps/:move", { :controller => "moves", :action => "play" })
 - See params
   - where can we access `params`?
 
-
-
+<div style="overflow: hidden;padding-top: 100%;position: relative;"><iframe loading="lazy" style="border: 0;height: 100%;left: 0;position: absolute;top: 0;width: 100%;" src="https://jelani.dev/dynamic-path-segment-demo/"></iframe></div>
