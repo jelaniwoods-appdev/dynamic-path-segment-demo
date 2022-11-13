@@ -2,56 +2,52 @@
 
 ## The Limit of Static Routes
 
-Whenever we define a route, like for `/about` in our application to display the about page...
-
-A **static route** is a route who's job is to do the same thing every time it's visited.
-
 A **static route** is a route that can _only_ be accessed when a person visits the route **exactly**.
 
 Meaning if we define a route for `/about` like this:
 
 ```rb
+# config/routes.rb
 get("/about", { :controller => "application", :action => "about" })
 ```
 
-Then this route **can only be activated** when a person visits `www.our-app-name.com/about` .
+Then this route **can only be activated** when a person visits `www.our-app-name.com/about`.
 
 This works great for pages with content that <u>doesn't change</u>, like a Home, Rules, or About page.
 
 This technique also works well when we get input from a user through a form submission (since **Query Strings** are optional and are allowed on _any_ route).
 
-While we often use Query Strings for processing form submissions. can be used for a lot of things,
-In fact, YouTube uses a Query String to determine which video you're watching:
+While we often use Query Strings for processing form submissions, they can be used for other app features. For example, YouTube uses a Query String to determine which video you're watching:
 
 > https://www.youtube.com/watch**?v=pKO9UjSeLew**
 
-But for some features in apps like YouTube, the New York Times, or GitHub we _want_ routes that look like this:
+For other features in large apps like YouTube, the New York Times, or GitHub we _want_ routes that look like this instead:
 
 YouTube:
 - https://youtube.com/c/gorailstv
-- https://youtube.com/c/jablinskigames
 - https://youtube.com/c/google
+- https://youtube.com/c/jablinskigames
 
 New York Times:
 - https://www.nytimes.com/section/todayspaper
 - https://www.nytimes.com/section/politics
 - https://www.nytimes.com/section/sports
 
-
+GitHub
 - https://github.com/raghubetina
+- https://github.com/appdev-projects
+- https://github.com/firstdraft
 
-without Query Strings
-
-If we wanted our routes to look like like that, we would need to define
 
 Using static routes, we would need to define very similar looking routes; one for each channel at YouTube.
 
 ```rb
-get("/c/Google", { :controller => "...", :action => "..." })
-get("/c/GorailsTV", { :controller => "...", :action => "..." })
-get("/c/JablinskiGames", { :controller => "...", :action => "..." })
+get("/c/google", { :controller => "...", :action => "..." })
+get("/c/gorailstv", { :controller => "...", :action => "..." })
+get("/c/jablinskigames", { :controller => "...", :action => "..." })
 ```
 
+Every channel on YouTube looks similar...
 
 ## What are Dynamic Routes?
 
