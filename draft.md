@@ -15,11 +15,11 @@ Then this route **can only be activated** when a person visits `www.our-app-name
 
 This works great for pages with content that <u>doesn't change</u>, like a Home, Rules, or About page.
 
-This technique also works well when we get input from a user through a form submission (since **Query Strings** are optional and are allowed on _any_ route).
+This technique also works well when we get input from a user through a form submission, since **Query Strings** are optional and can be added to _any_ route.
 
 While we often use Query Strings for processing form submissions, they can be used for other app features. For example, YouTube uses a Query String to determine which video you're watching:
 
-> https://www.youtube.com/watch**?v=pKO9UjSeLew**
+https://www.youtube.com/watch**?v=pKO9UjSeLew**
 
 For other features in large apps like YouTube, the New York Times, or GitHub we _want_ routes that look like this instead:
 
@@ -38,7 +38,6 @@ GitHub
 - https://github.com/appdev-projects
 - https://github.com/firstdraft
 
-
 Using static routes, we would need to define very similar looking routes; one for each channel at YouTube.
 
 ```rb
@@ -55,7 +54,7 @@ Dynamic route segments are dynamic routes (a.k.a. flexible path segments, url sl
 
 Defining one route that can match multiple values.
 
-In cases where we want to define **one route** that matches `/post/1`, `/post/abc`, or `/posts/` anything
+In cases where we want to define **one route** that matches `/post/1`, `/post/abc`, or `/posts/`anything.
 
 
 ### Why do we use them
@@ -88,6 +87,24 @@ get("/rps/:move", { :controller => "moves", :action => "play" })
 
 ### Using `params`
 
+While defining a dynamic path segment in the routes with the `:` will allow the router to match _any_ route that matches the pattern, usually, the value in important and we want to use somewhere in the view template to make the UI dynamic.
+
+Just like with query strings, we can retreive the value from the dynamic path using the name we choose in the routes.
+
+The value is available in the `params` Hash.
+
+So if the user is visiting `/rps/rock`, we can access `"rock"` from the `params` Hash in the controller action like this:
+
+```rb
+class MovesController < ApplicationController
+  def play
+    # Parameters look like:  { "move" => "rock" }
+    @player_move = params.fetch("move")
+    # ...
+    render({ :template => "moves/play.html.erb" })
+  end
+end
+```
 
 ## Demo
 
