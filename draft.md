@@ -19,7 +19,7 @@ This technique also works well when we get input from a user through a form subm
 
 While we often use Query Strings for processing form submissions, they can be used for other app features. For example, YouTube uses a Query String to determine which video you're watching:
 
-https://www.youtube.com/watch**?v=pKO9UjSeLew**
+> https://www.youtube.com/watch**?v=pKO9UjSeLew**
 
 For other features in large apps like YouTube, the New York Times, or GitHub we _want_ routes that look like this instead:
 
@@ -75,7 +75,7 @@ get("/rps/paper", { :controller => "moves", :action => "play_paper" })
 get("/rps/scissors", { :controller => "moves", :action => "play_scissors" })
 ```
 
-By beginning a segment of a path with a colon (`:`), we make that segment dynamic. Rails will, for the purpose of routing, allow anything there; it’s like a wildcard.
+By beginning a segment of the route with a colon (`:`), we make that segment dynamic. Rails will, for the purpose of routing, allow anything there; it’s like a wildcard.
 
 
 Now one route can do the work for the 3 routes we defined before.
