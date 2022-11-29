@@ -15,9 +15,9 @@ Then this route **can only be activated** when a person visits `www.our-app-name
 
 This works great for pages with content that <u>doesn't change</u>, like a Home, Rules, or About page.
 
-This technique also works well when we get input from a user through a form submission, since **Query Strings** are optional and can be added to _any_ route.
+This technique also works well when we get input from a user through a form submission, since **Query Strings** are optional and can be added to the end of _any_ route.
 
-While we often use Query Strings for processing form submissions, they can be used for other app features. For example, YouTube uses a Query String to determine which video you're watching:
+While we often use Query Strings for processing form submissions, they can be used for other dynamic app features. For example, YouTube uses a Query String to determine which video you're watching. Note the Query String present at the end of any video URL:
 
 > https://www.youtube.com/watch**?v=pKO9UjSeLew**
 
@@ -38,6 +38,8 @@ GitHub
 - https://github.com/appdev-projects
 - https://github.com/firstdraft
 
+Where each route follows a pattern. The routes have the same beginning segment (`/c/`, `/section/`) but then the next segment is something unique.
+
 Using static routes, we would need to define very similar looking routes; one for each channel at YouTube.
 
 ```rb
@@ -50,11 +52,11 @@ Every channel on YouTube looks similar...
 
 ## What are Dynamic Routes?
 
-Dynamic route segments are dynamic routes (a.k.a. flexible path segments, url slugs, pretty urls, and others)
+Dynamic route segments are dynamic routes (a.k.a. flexible path segments, url slugs, or pretty urls)
 
-Defining one route that can match multiple values.
+A Dynamic route is one route that can match _multiple_ different values. This is in contrast to Static Routes that only work with **exact** values.
 
-In cases where we want to define **one route** that matches `/post/1`, `/post/abc`, or `/posts/`anything.
+For example, we could define **one dynamic route** that matches `/post/1`, `/post/abc`, or `/posts/literally-anything`.
 
 
 ### Why do we use them
@@ -63,7 +65,7 @@ Defining routes by using predefined paths is not always enough for complex appli
 
 - Support infinite route variations
 - Save time defining routes
-- We need a piece of information in the dynamic part 
+- We need a piece of information from the dynamic part 
 
 ## How to make a Dynamic Route
 
@@ -77,12 +79,15 @@ get("/rps/scissors", { :controller => "moves", :action => "play_scissors" })
 
 By beginning a segment of the route with a colon (`:`), we make that segment dynamic. Rails will, for the purpose of routing, allow anything there; it’s like a wildcard.
 
+Notice that each of these routes are similar in structure. They all start with `/rps/` and end with some move name.
 
 Now one route can do the work for the 3 routes we defined before.
 
 ```rb
 get("/rps/:move", { :controller => "moves", :action => "play" })
 ```
+
+This saves space in our `routes.rb` file, but brings up a new problem.
 
 
 ### Using `params`
