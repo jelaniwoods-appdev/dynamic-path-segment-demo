@@ -87,8 +87,9 @@ Now one route can do the work for the 3 routes we defined before.
 get("/rps/:move", { :controller => "moves", :action => "play" })
 ```
 
-This saves space in our `routes.rb` file, but brings up a new problem.
+This saves space in our `routes.rb` file, but introduces a new problem. When we used static routes for each rock paper scissors move, each route had it's own Controller Action and could safely assume that when someone visited `/rps/paper` that they "choose paper" as their move and we wrote code with that assumption. Now that there's only one route, how can we determine when someone visits `/rps/paper` vs `/rps/rock`?
 
+Fortunately for us, we have access to the value in the dynamic path segment through the `params` Hash.
 
 ### Using `params`
 
