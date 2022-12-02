@@ -1,10 +1,10 @@
-# Dynamic Routing
+# Dynamic Routes
 
 ## The Limit of Static Routes
 
 A **static route** is a route that can _only_ be accessed when a person visits the route **exactly**.
 
-Meaning if we define a route for `/about` like this:
+Meaning, if we define a route for `/about` like this:
 
 ```rb
 # config/routes.rb
@@ -17,26 +17,30 @@ This works great for pages with content that <u>doesn't change</u>, like a Home,
 
 This technique also works well when we get input from a user through a form submission, since **Query Strings** are optional and can be added to the end of _any_ route.
 
-While we often use Query Strings for processing form submissions, they can be used for other dynamic app features. For example, YouTube uses a Query String to determine which video you're watching. Note the Query String present at the end of any video URL:
+While we often use Query Strings for processing form submissions, they can be used for other dynamic app features. YouTube, for example, uses a Query String to determine which video you're watching.
 
-> https://www.youtube.com/watch**?v=pKO9UjSeLew**
+Note the Query String present at the end of any video URL:
 
-For other features in large apps like YouTube, the New York Times, or GitHub we _want_ routes that look like this instead:
+> https://www.youtube.com/watch<strong>?v=pKO9UjSeLew</strong>
+
+<small>The route is `/watch`, while the Query String is `?v=pKO9UjSeLew`</small>
+
+For other features in large apps like YouTube, the New York Times, or GitHub we want routes that are more readable and memorizable that look like this instead:
 
 YouTube:
-- https://youtube.com/c/gorailstv
-- https://youtube.com/c/google
-- https://youtube.com/c/jablinskigames
+- `https://youtube.com/c/google`
+- `https://youtube.com/c/gorailstv`
+- `https://youtube.com/c/jablinskigames`
 
 New York Times:
-- https://www.nytimes.com/section/todayspaper
-- https://www.nytimes.com/section/politics
-- https://www.nytimes.com/section/sports
+- `https://www.nytimes.com/section/todayspaper`
+- `https://www.nytimes.com/section/politics`
+- `https://www.nytimes.com/section/sports`
 
 GitHub
-- https://github.com/raghubetina
-- https://github.com/appdev-projects
-- https://github.com/firstdraft
+- `https://github.com/raghubetina`
+- `https://github.com/appdev-projects`
+- `https://github.com/firstdraft`
 
 Where each route follows a pattern. The routes have the same beginning segment (`/c/`, `/section/`) but then the next segment is something unique.
 
@@ -48,26 +52,27 @@ get("/c/gorailstv", { :controller => "...", :action => "..." })
 get("/c/jablinskigames", { :controller => "...", :action => "..." })
 ```
 
-Every channel on YouTube looks similar...
+Using this approach, when a user signs up and creates a new channel, a developer would need to write a new route, controller action, and view template instantly, before the user could even _see_ their channel. Writing and deploying code _that_ quickly and frequently isn't feasible for human developers.
+
+What do we do then? The solution here is to use dynamic routes and have Ruby write our view templates for us.
 
 ## What are Dynamic Routes?
 
-Dynamic route segments are dynamic routes (a.k.a. flexible path segments, url slugs, or pretty urls)
+(a.k.a. dynamic route segments, flexible path segments, url slugs, or pretty urls)
 
-A Dynamic route is one route that can match _multiple_ different values. This is in contrast to Static Routes that only work with **exact** values.
+A Dynamic route is one route that can match _multiple_ different values. You define a route pattern, where any URL that matches the pattern is accepted. This is in contrast to Static Routes that only work with **exact** values.
 
 For example, we could define **one dynamic route** that matches `/post/1`, `/post/abc`, or `/posts/literally-anything`.
 
-
 ### Why do we use them
 
-Defining routes by using predefined paths is not always enough for complex applications. 
+Defining only static routes with exact paths is not always enough for complex applications where we need to:
 
-- Support infinite route variations
-- Save time defining routes
-- We need a piece of information from the dynamic part 
+- support infinite route variations
+- save time defining routes, controller actions, and view templates
+- identify and use a piece of information from the dynamic part (?)
 
-## How to make a Dynamic Route
+## How to define a Dynamic Route
 
 Instead of a **static route**, that will only be activated when a person matches exactly one route that a person can visit:
 
@@ -79,9 +84,7 @@ get("/rps/scissors", { :controller => "moves", :action => "play_scissors" })
 
 By beginning a segment of the route with a colon (`:`), we make that segment dynamic. Rails will, for the purpose of routing, allow anything there; it’s like a wildcard.
 
-Notice that each of these routes are similar in structure. They all start with `/rps/` and end with some move name.
-
-Now one route can do the work for the 3 routes we defined before.
+Notice that each of these routes are similar in structure. They all start with `/rps/` and end with some move name. With a dynamic route we can define one route that will match all three of those routes:
 
 ```rb
 get("/rps/:move", { :controller => "moves", :action => "play" })
@@ -93,11 +96,11 @@ Fortunately for us, we have access to the value in the dynamic path segment thro
 
 ### Using `params`
 
-While defining a dynamic path segment in the routes with the `:` will allow the router to match _any_ route that matches the pattern, usually, the value in important and we want to use somewhere in the view template to make the UI dynamic.
+While defining a dynamic path segment in the routes with the `:` will allow the router to match _any_ route that matches the pattern, usually, the actual value entered in the dynamic segment is important and we want to use somewhere in the view template to make the UI dynamic.
 
 Just like with query strings, we can retreive the value from the dynamic path using the name we choose in the routes.
 
-The value is available in the `params` Hash.
+The value is available in the `params` Hash and the key for the value is the name of the dynamic path segment (`"move"` in this case).
 
 So if the user is visiting `/rps/rock`, we can access `"rock"` from the `params` Hash in the controller action like this:
 
@@ -113,10 +116,5 @@ end
 ```
 
 ## Demo
-
-- Define route with dynamic route segment
-- Visit URL
-- See params
-  - where can we access `params`?
 
 <div style="overflow: hidden;padding-top: 100%;position: relative;"><iframe loading="lazy" style="border: 0;height: 100%;left: 0;position: absolute;top: 0;width: 100%;" src="https://jelani.dev/dynamic-path-segment-demo/"></iframe></div>
