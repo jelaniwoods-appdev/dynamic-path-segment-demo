@@ -23,7 +23,7 @@ Note the Query String present at the end of any video URL:
 
 > https://www.youtube.com/watch<strong>?v=pKO9UjSeLew</strong>
 
-<small>The route is `/watch`, while the Query String is `?v=pKO9UjSeLew`</small>
+<small>The route (or path) is `/watch`, while the query string is `?v=pKO9UjSeLew`</small>
 
 For other features in large apps like YouTube, the New York Times, or GitHub we want routes that are more readable and memorizable that look like this instead:
 
@@ -44,7 +44,7 @@ GitHub
 
 Where each route follows a pattern. The routes have the same beginning segment (`/c/`, `/section/`) but then the next segment is something unique.
 
-Using static routes, we would need to define very similar looking routes; one for each channel at YouTube.
+If we wanted to define those routes for YouTube, using static routes, we would need to define very similar looking routes; one for each channel at YouTube.
 
 ```rb
 get("/c/google", { :controller => "...", :action => "..." })
@@ -52,7 +52,7 @@ get("/c/gorailstv", { :controller => "...", :action => "..." })
 get("/c/jablinskigames", { :controller => "...", :action => "..." })
 ```
 
-Using this approach, when a user signs up and creates a new channel, a developer would need to write a new route, controller action, and view template instantly, before the user could even _see_ their channel. Writing and deploying code _that_ quickly and frequently isn't feasible for human developers.
+Using this approach, when a user signs up and creates a new channel, a developer would need to write a new route, controller action, and view template _instantly_, before the user could even view their channel. Writing and deploying code _that_ quickly and frequently isn't feasible for human developers.
 
 What do we do then? The solution here is to use dynamic routes and have Ruby write our view templates for us.
 
@@ -60,7 +60,7 @@ What do we do then? The solution here is to use dynamic routes and have Ruby wri
 
 (a.k.a. dynamic route segments, flexible path segments, url slugs, or pretty urls)
 
-A Dynamic route is one route that can match _multiple_ different values. You define a route pattern, where any URL that matches the pattern is accepted. This is in contrast to Static Routes that only work with **exact** values.
+A Dynamic route is one route that can match _multiple_ different values. You define a "route pattern", where any URL that matches the pattern is accepted and runs the designated controller action. This is in contrast to Static Routes that only work with **exact** values.
 
 For example, we could define **one dynamic route** that matches `/post/1`, `/post/abc`, or `/posts/literally-anything`.
 
