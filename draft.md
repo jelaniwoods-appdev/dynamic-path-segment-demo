@@ -84,7 +84,7 @@ get("/rps/scissors", { :controller => "moves", :action => "play_scissors" })
 
 By beginning a segment of the route with a colon (`:`), we make that segment dynamic. Rails will, for the purpose of routing, allow anything there; it’s like a wildcard.
 
-Notice that each of these routes are similar in structure. They all start with `/rps/` and end with some move name. With a dynamic route we can define one route that will match all three of those routes:
+Notice that each of these routes are similar in structure. They all start with `/rps/` and end with some move name. With a dynamic route we can define one route that will match all three of those move names:
 
 ```rb
 get("/rps/:move", { :controller => "moves", :action => "play" })
