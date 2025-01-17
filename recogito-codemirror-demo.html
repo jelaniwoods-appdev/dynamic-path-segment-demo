@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+  <title>test</title>
+  <script src="https://cdn.jsdelivr.net/npm/@recogito/recogito-js@1.8.4/dist/recogito.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/recogito-js@1.8.4/dist/recogito.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js" integrity="sha512-6cPYokihlrofMNApz7OXVQNObWjLiKGIBBb7+UB+AuMiRCLKmFKgrwms21sHq3bdFFZWpfHYRJBJvMFMPj1S9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <textarea id="editor">e
+  </textarea>
+  <script>
+    var myTextarea = document.getElementById("editor")
+    var editor = CodeMirror.fromTextArea(myTextarea, {
+      lineNumbers: true
+    });
+    window.editor = editor;
+  </script>
+  <script type="text/javascript">
+      Recogito.init({
+        content: document.querySelector("body"),
+        disableEditor: true,
+        mode: "pre"
+      });
+  </script>
+
+</body>
+</html>
